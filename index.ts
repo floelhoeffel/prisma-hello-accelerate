@@ -6,26 +6,26 @@ const prisma = new PrismaClient().$extends(useAccelerate);
 async function main() {
   const startTime = Date.now();
 
-  await prisma.user.create({
-    data: {
-      email: "loelhoeffel@prisma.io",
-    },
-  });
+  // await prisma.user.create({
+  //   data: {
+  //     email: "loelhoeffel3@prisma.io",
+  //   },
+  // });
 
-  await prisma.user.create({
-    data: {
-      email: "loelhoeffel2@prisma.io",
-    },
-  });
+  // await prisma.user.create({
+  //   data: {
+  //     email: "loelhoeffel4@prisma.io",
+  //   },
+  // });
 
-  // const { data, info } = await prisma.user
-  //   .count({
-  //     cacheStrategy: { swr: 60, ttl: 60 },
-  //   })
-  //   .withAccelerateInfo();
+  const { data, info } = await prisma.user
+    .count({
+      cacheStrategy: { swr: 60, ttl: 60 },
+    })
+    .withAccelerateInfo();
 
-  // console.dir(info);
-  // console.log("Request took:", Date.now() - startTime, "ms");
+  console.dir(info);
+  console.log("Request took:", Date.now() - startTime, "ms");
 }
 
 main()
