@@ -3,41 +3,21 @@ import useAccelerate from "@prisma/extension-accelerate";
 
 const prisma = new PrismaClient().$extends(useAccelerate);
 
-let startTime = Date.now();;
-
 async function main() {
-  startTime = Date.now();
-  await prisma.user.findMany({
-    cacheStrategy: {swr: 60, ttl: 60}
-    
-  }).withAccelerateInfo();
+  const startTime = Date.now();
 
-  startTime = Date.now();
-  const {data, info } = await prisma.user.findMany({
-    cacheStrategy: {swr: 60, ttl: 60}
-    
-  }).withAccelerateInfo();
+  const { data, info } = await prisma.user
+    .count({
+      cacheStrategy: { swr: 60, ttl: 60 },
+    })
+    .withAccelerateInfo();
 
-  // const users = await prisma.user.findMany({
-
-  //   cacheStrategy: {swr: 60, ttl: 60}
-    
-  // })
-
-  console.dir(info)
-
-  //   const newUser = await prisma.user.create({
-  //     data: {
-  //       name: "Alice",
-  //       email: "alice@prisma.io",
-  //     },
-  //   });
+  console.dir(info);
+  console.log("Request took:", Date.now() - startTime, "ms");
 }
 
 main()
   .then(async () => {
-    console.log("Request took:", Date.now() - startTime, "ms");
-
     await prisma.$disconnect();
   })
   .catch(async (e) => {
