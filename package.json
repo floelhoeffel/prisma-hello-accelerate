@@ -1,8 +1,8 @@
 {
   "dependencies": {
-    "@prisma/client": "^4.10.0-dev.90",
-    "@prisma/extension-accelerate": "^0.0.0-experimental-06905c0",
-    "prisma": "^4.10.0-dev.90"
+    "@prisma/client": "^4.10.0",
+    "@prisma/extension-accelerate": "^0.1.0",
+    "prisma": "^4.10.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
