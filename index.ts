@@ -6,16 +6,16 @@ let iteration = 0;
 let totalTime = 0;
 
 async function createData() {
-  // await prisma.user.create({
-  //   data: {
-  //     email: "loelhoeffel3@prisma.io",
-  //   },
-  // });
-  // await prisma.user.create({
-  //   data: {
-  //     email: "loelhoeffel4@prisma.io",
-  //   },
-  // });
+  await prisma.user.create({
+    data: {
+      email: "loelhoeffel5@prisma.io",
+    },
+  });
+  await prisma.user.create({
+    data: {
+      email: "loelhoeffel6@prisma.io",
+    },
+  });
 }
 
 async function getData() {
@@ -27,12 +27,13 @@ async function getData() {
   const startTime = Date.now();
 
   const { data, info } = await prisma.user
-    .count({
-      cacheStrategy: { ttl: 3600},
+    .findMany({
+      cacheStrategy: { ttl: 5, swr:5},
     })
     .withAccelerateInfo();
 
-  console.log("Iteration", iteration);
+  console.log("---- Iteration", iteration);
+  console.dir(data);
   console.dir(info);
   const time = Date.now() - startTime;
   totalTime = totalTime + time;
@@ -43,6 +44,7 @@ async function getData() {
 
 async function main() {
   getData();
+  // createData()
 }
 
 main()
