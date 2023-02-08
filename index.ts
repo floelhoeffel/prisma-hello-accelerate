@@ -38,6 +38,7 @@ async function createData() {
 
 async function getData() {
   if (iteration > 100) {
+    console.log("- - - - Done - - - -")
     console.log("Total time", totalTime);
     console.log("Average request time", totalTime / iteration);
     cacheStatus.ttl.time = cacheStatus.ttl.time / cacheStatus.ttl.count;
@@ -51,7 +52,7 @@ async function getData() {
 
   const { data, info } = await prisma.user
     .findMany({
-      cacheStrategy: { ttl: 5, swr: 5 },
+      cacheStrategy: { ttl: 30, swr: 30 },
     })
     .withAccelerateInfo();
   if (info) {
