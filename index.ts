@@ -24,15 +24,11 @@ let cacheStatus = {
 };
 
 async function createData() {
-  await prisma.user.create({
-    data: {
-      email: "loelhoeffel5@prisma.io",
-    },
-  });
-  await prisma.user.create({
-    data: {
-      email: "loelhoeffel6@prisma.io",
-    },
+  const lastCount = await prisma.user.count();
+  await prisma.user.createMany({
+    data: Array.from({ length: 10 }).map((_, index) => ({
+      email: `user${lastCount + index}@prisma.io`,
+    })),
   });
 }
 
@@ -70,8 +66,11 @@ async function getData() {
 }
 
 async function main() {
-  getData();
-  // createData();
+  if (process.argv[2] === "seed") {
+    await createData();
+  } else {
+    await getData();
+  }
 }
 
 main().catch((e) => {
