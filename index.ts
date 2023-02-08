@@ -65,8 +65,6 @@ async function getData() {
   cacheStatus.miss.time = cacheStatus.miss.time / cacheStatus.miss.count;
   cacheStatus.none.time = cacheStatus.none.time / cacheStatus.none.count;
   console.log(cacheStatus);
-
-  return;
 }
 
 async function main() {
