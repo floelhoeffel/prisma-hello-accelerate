@@ -38,7 +38,7 @@ async function createData() {
 
 async function getData() {
   if (iteration > 100) {
-    console.log("- - - - Done - - - -")
+    console.log("- - - - Done - - - -");
     console.log("Total time", totalTime);
     console.log("Average request time", totalTime / iteration);
     cacheStatus.ttl.time = cacheStatus.ttl.time / cacheStatus.ttl.count;
@@ -71,7 +71,7 @@ async function getData() {
 
 async function main() {
   getData();
-  // createData()
+  // createData();
 }
 
 main()
