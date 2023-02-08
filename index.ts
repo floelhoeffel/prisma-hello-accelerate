@@ -56,14 +56,16 @@ async function getData() {
     }
   }
 
-  console.log("- - - - Done - - - -");
+  console.log("\n- - - - Done - - - -");
   console.log("Total time", totalTime);
   console.log("Average request time", totalTime / requestsCount);
+
   cacheStatus.ttl.time = cacheStatus.ttl.time / cacheStatus.ttl.count;
   cacheStatus.swr.time = cacheStatus.swr.time / cacheStatus.swr.count;
   cacheStatus.miss.time = cacheStatus.miss.time / cacheStatus.miss.count;
   cacheStatus.none.time = cacheStatus.none.time / cacheStatus.none.count;
   console.log(cacheStatus);
+
   return;
 }
 
